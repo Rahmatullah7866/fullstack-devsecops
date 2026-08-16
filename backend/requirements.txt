@@ -1,0 +1,18 @@
+Django==5.0.2
+djangorestframework==3.14.0
+django-cors-headers==4.3.1
+djangorestframework-simplejwt==5.3.1
+psycopg2-binary==2.9.9
+gunicorn==21.2.0
+
+# Testing & BDD Frameworks
+pytest==8.0.1
+pytest-django==4.8.0
+pytest-cov==4.1.0
+behave==1.2.6
+behave-django==1.4.0
+
+# DevSecOps & Security Tools
+bandit==1.7.7
+safety==3.0.1
+pre-commit==3.6.1

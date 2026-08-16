@@ -1,0 +1,70 @@
+name: DevSecOps Complete Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  devsecops-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Backend Dependencies
+        run: |
+          cd backend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: DevSecOps - SAST Static Security Scan (Bandit)
+        run: |
+          cd backend
+          bandit -r api core
+
+      - name: TDD - Backend Unit Tests (Pytest)
+        run: |
+          cd backend
+          pytest
+
+      - name: BDD - Behavioral Verification (Behave)
+        run: |
+          cd backend
+          python manage.py migrate
+          python manage.py behave
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Frontend Dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: DevSecOps - NPM Security Audit
+        run: |
+          cd frontend
+          npm audit --audit-level=high
+
+      - name: TDD - Frontend Unit Tests (Vitest)
+        run: |
+          cd frontend
+          npm test -- --run
+
+      - name: DevSecOps - Container Vulnerability Scanning (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker-image'
+          format: 'table'
+          exit-code: '0'
+          severity: 'CRITICAL,HIGH'
