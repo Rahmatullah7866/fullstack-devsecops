@@ -2,6 +2,8 @@
 
 An enterprise-ready full-stack application integrated with modern DevSecOps practices, containerization, and automated security pipelines.
 
+![CI Status](https://github.com/Rahmatullah7866/fullstack-devsecops/actions/workflows/devsecops-ci.yaml/badge.svg)
+
 ---
 
 ## 🛠 Tech Stack
