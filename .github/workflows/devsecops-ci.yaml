@@ -28,16 +28,12 @@ jobs:
       - name: DevSecOps - SAST Static Security Scan (Bandit)
         run: |
           cd backend
-          bandit -r api core
+          bandit -c .bandit -r .
 
       - name: TDD - Backend Unit Tests (Pytest)
         run: |
           cd backend
           pytest
-
-      - name: Run Bandit Security Scan
-        run: |
-          bandit -r backend/ --skip B101
 
       - name: BDD - Behavioral Verification (Behave)
         run: |

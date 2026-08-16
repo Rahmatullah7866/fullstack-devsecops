@@ -14,7 +14,7 @@ An enterprise-ready full-stack application integrated with modern DevSecOps prac
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
