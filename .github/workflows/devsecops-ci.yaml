@@ -35,6 +35,10 @@ jobs:
           cd backend
           pytest
 
+      - name: Run Bandit Security Scan
+        run: |
+          bandit -r backend/ --skip B101
+
       - name: BDD - Behavioral Verification (Behave)
         run: |
           cd backend
